@@ -56,7 +56,13 @@ function dotEnvParser<Infer extends boolean>(raw: string, infer: unknown = false
    */
   function parseValue(value: string): string | number | boolean {
     const unquoted = unquote(value);
-    const val = unquoted ? unquoted : value.trim();
+    let val = unquoted ? unquoted : value.trim();
+
+    // Remove backslashes before #, = and quotes
+    val = val.replace(/\\#/g, "#");
+    val = val.replace(/\\=/g, "=");
+    val = val.replace(/\\"/g, '"');
+    val = val.replace(/\\'/g, "'");
 
     if (infer && val !== "" && !Number.isNaN(Number(val))) {
       // If value is a number

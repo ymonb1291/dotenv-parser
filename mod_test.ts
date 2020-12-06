@@ -221,11 +221,11 @@ Deno.test("A string value can be double quoted and surrounding spaces are not tr
 });
 
 Deno.test("A single quoted string can contain escaped single-quotes", () => {
-  assertEquals(response["ESCAPED_SINGLE_QUOTED"], "a \\'b\\' c");
+  assertEquals(response["ESCAPED_SINGLE_QUOTED"], "a 'b' c");
 });
 
 Deno.test("A double quoted string can contain escaped double-quotes", () => {
-  assertEquals(response["ESCAPED_DOUBLE_QUOTED"], 'a \\"b\\" c');
+  assertEquals(response["ESCAPED_DOUBLE_QUOTED"], 'a "b" c');
 });
 
 Deno.test("Multiline unquoted values are accepted", () => {
@@ -241,13 +241,13 @@ Deno.test("Multiline double-quoted values are accepted", () => {
 });
 
 Deno.test("Escaped hashtags are not treated as comment in multiline values", () => {
-  assertEquals(response["HASH_MULTI"], "hash\n\\#multi");
+  assertEquals(response["HASH_MULTI"], "hash\n#multi");
 });
 
 Deno.test("Escaped equal characters without key are not treated as a pair in multiline values", () => {
-  assertEquals(response["EQUAL_MULTI"], "equal\n\\=multi");
+  assertEquals(response["EQUAL_MULTI"], "equal\n=multi");
 });
 
 Deno.test("Escaped equal characters with key are not treated as a pair in multiline values", () => {
-  assertEquals(response["KEY_EQUAL_MULTI"], "key\nequal\\=multi");
+  assertEquals(response["KEY_EQUAL_MULTI"], "key\nequal=multi");
 });
