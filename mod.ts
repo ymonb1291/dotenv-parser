@@ -32,8 +32,14 @@ const REGEXP_QUOTED: RegExp = /^ *(?:("|')([^]*)(\1)) *$/;
  * ```
  */
 function dotEnvParser<Infer = false>(raw: string): Data;
-function dotEnvParser<Infer extends boolean>(raw: string, infer: Infer): Infer extends true ? TypedData : Data;
-function dotEnvParser<Infer extends boolean>(raw: string, infer: unknown = false): unknown {
+function dotEnvParser<Infer extends boolean>(
+  raw: string,
+  infer: Infer,
+): Infer extends true ? TypedData : Data;
+function dotEnvParser<Infer extends boolean>(
+  raw: string,
+  infer: unknown = false,
+): unknown {
   infer = infer ? true : false;
 
   /**
@@ -90,4 +96,4 @@ function dotEnvParser<Infer extends boolean>(raw: string, infer: unknown = false
   return parse(raw);
 }
 
-export {dotEnvParser}
+export { dotEnvParser };
