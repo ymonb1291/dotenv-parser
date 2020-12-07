@@ -91,7 +91,7 @@ const fresponse = dotEnvParser(pairs, false);
 const tresponse = dotEnvParser(pairs, true);
 
 Deno.test("Comments and empty lines are skipped", () => {
-  const res = Object.keys(response).length
+  const res = Object.keys(response).length;
   assertEquals(res, 26);
 });
 
