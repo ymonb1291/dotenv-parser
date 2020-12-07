@@ -4,7 +4,6 @@ description: A fast, zero-permission dotenv parser.
 homepage: https://github.com/ymonb1291/dotenv-parser
 unstable: false
 unlisted: false
-releaseType: prerelease
 files:
   - ./README.md
   - ./LICENSE
