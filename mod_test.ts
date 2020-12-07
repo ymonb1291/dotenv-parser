@@ -90,6 +90,11 @@ const response = dotEnvParser(pairs);
 const fresponse = dotEnvParser(pairs, false);
 const tresponse = dotEnvParser(pairs, true);
 
+Deno.test("Comments and empty lines are skipped", () => {
+  const res = Object.keys(response).length
+  assertEquals(res, 26);
+});
+
 Deno.test("Numeric keys are skipped", () => {
   const res = response.hasOwnProperty("0");
   assertEquals(res, false);
