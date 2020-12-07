@@ -55,7 +55,38 @@ interface TypedData {
 }
 ```
 # Parsing rules
-*Coming soon* 
+The parser supports key/value pairs formatted as `KEY=VALUE`. The following rules apply:
+* Empty lines are skipped
+* Lines beginning with `#` are treated as comments and are skipped
+* `KEY=VALUE` becomes `{KEY="VALUE"}`
+  * Single quoted values can also be used: `KEY='VALUE'` also becomes `{KEY="VALUE"}`
+  * Double quoted values can also be used: `KEY="VALUE"` also becomes `{KEY="VALUE"}`
+* Keys can contain upper case letters `A-Z`, lower case letters `a-z` and underscore character `_`. Numbers `0-9` are also valid when not in first position. For example:
+  * `_Key0=VALUE` is valid and becomes `{_Key0="VALUE"}`
+  * `0Key_=VALUE` is not valid
+* Empty values are treated as empty string. `EMPTY=` becomes `{EMPTY=""}`
+* Single and double quoted values keep their surrounding spaces. Non quoted values do not.
+  * `KEY= VALUE ` becomes `{KEY="VALUE"}`
+  * `KEY=" VALUE "` becomes `{KEY=" VALUE "}`
+* Inner quotes are maintained. `JSON={"KEY": "VALUE"}` becomes `{JSON="{\"KEY\": \"VALUE\"}"}`
+* Multiline values are accepted with and without quotes. For example:
+  ```
+  SAY_HELLO=Hello
+  World!
+  ```
+  becomes `{SAY_HELLO: "Hello\nWorld!"}`
+* Multiline values can contain `=` if escaped
+  ```
+  CALC=1+1
+  \\=2
+  ```
+  becomes `{CALC: "1+1\n=2",}`
+* Multiline values can contain `#` if escaped
+  ```
+  HASH=New trend on Twitter
+  \\#dotenv-parser
+  ```
+  becomes `{HASH: "New trend on Twitter\n#dotenv-parser"}`
 
 # Contributions
 PRs are welcome!
