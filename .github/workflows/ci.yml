@@ -34,7 +34,7 @@ jobs:
         run: deno --version
 
       - name: Cache Dependencies
-        run: deno cache mod_test.ts
+        run: deno cache parser_test.ts
 
       - name: Run Tests
         run: deno test
