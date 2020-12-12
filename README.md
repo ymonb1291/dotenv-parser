@@ -1,4 +1,12 @@
 # dotenv-parser
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ymonb1291/dotenv-parser/ci?label=ci)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/ymonb1291/dotenv-parser?include_prereleases)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ymonb1291/dotenv-parser)
+[![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/dotenv-parser/mod.ts)
+![GitHub](https://img.shields.io/github/license/ymonb1291/dotenv-parser)
+
+[![nest badge](https://nest.land/badge.svg)](https://nest.land/package/dotenv-parser)
+
 A fast, zero-permission Dotenv parser.
 
 This module doesn't load any file, it only parses their content.
@@ -6,6 +14,10 @@ This module doesn't load any file, it only parses their content.
 ## Usage
 Import `dotenv-parser`:
 ```
+// From Deno.land
+import { dotEnvParser } from "https://deno.land/x/dotenv_parser/mod.ts";
+// From Nest.land
+import { dotEnvParser } from "https://x.nest.land/dotenv-parser@0.2.0/mod.ts";
 // From Denopkg
 import { dotEnvParser } from "https://denopkg.com/ymonb1291/dotenv-parser/mod.ts";
 // From Github
