@@ -15,7 +15,39 @@ const REGEXP_PAIRS: RegExp =
 /** Matches single and double quoted strings */
 const REGEXP_QUOTED: RegExp = /^ *(?:("|')([^]*)(\1)) *$/;
 
+/**
+ * The dotenv parser.
+ * @param raw Raw data to parse
+ * @param infer Numbers and booleans will be converted to their respective primitive types when true
+ * ```
+ * const env = `a="A"\nb=2\nc=true`;
+ * 
+ * let res = dotEnvParser(env);
+ * console.log(res);
+ * // -> { a: "A", b: "2", c: "true" }
+ * 
+ * res = dotEnvParser(env, true);
+ * console.log(res);
+ * // -> { a: "A", b: 2, c: true }
+ * ```
+ */
 export function parser<Infer = false>(raw: string): Data;
+/**
+ * The dotenv parser.
+ * @param raw Raw data to parse
+ * @param infer Numbers and booleans will be converted to their respective primitive types when true
+ * ```
+ * const env = `a="A"\nb=2\nc=true`;
+ * 
+ * let res = dotEnvParser(env);
+ * console.log(res);
+ * // -> { a: "A", b: "2", c: "true" }
+ * 
+ * res = dotEnvParser(env, true);
+ * console.log(res);
+ * // -> { a: "A", b: 2, c: true }
+ * ```
+ */
 export function parser<Infer extends boolean>(
   raw: string,
   infer: Infer,
