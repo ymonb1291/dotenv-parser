@@ -15,6 +15,11 @@ const REGEXP_PAIRS: RegExp =
 /** Matches single and double quoted strings */
 const REGEXP_QUOTED: RegExp = /^ *(?:("|')([^]*)(\1)) *$/;
 
+export function dotEnvParser<Infer = false>(raw: string): Data;
+export function dotEnvParser<Infer extends boolean>(
+  raw: string,
+  infer: Infer,
+): Infer extends true ? TypedData : Data;
 /**
  * The dotenv parser.
  * @param raw Raw data to parse
@@ -31,12 +36,7 @@ const REGEXP_QUOTED: RegExp = /^ *(?:("|')([^]*)(\1)) *$/;
  * // -> { a: "A", b: 2, c: true }
  * ```
  */
-function dotEnvParser<Infer = false>(raw: string): Data;
-function dotEnvParser<Infer extends boolean>(
-  raw: string,
-  infer: Infer,
-): Infer extends true ? TypedData : Data;
-function dotEnvParser<Infer extends boolean>(
+export function dotEnvParser<Infer extends boolean>(
   raw: string,
   infer: unknown = false,
 ): unknown {
@@ -95,5 +95,3 @@ function dotEnvParser<Infer extends boolean>(
 
   return parse(raw);
 }
-
-export { dotEnvParser };
