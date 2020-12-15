@@ -1,10 +1,13 @@
 name: dotenv-parser
 entry: ./mod.ts
-description: A fast, zero-permission dotenv parser.
+description: A fast, zero-permission parser for '.env' files with support for multiline variables.
 homepage: https://github.com/ymonb1291/dotenv-parser
 unstable: false
 unlisted: false
+files:
+  - "**/*.ts"
+  - "LICENSE"
+  - "README.md"
 ignore:
-  - .github/
-  - .vscode/
+  - "**/*_test.ts"
 check: false
