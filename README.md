@@ -7,23 +7,38 @@
 
 [![nest badge](https://nest.land/badge.svg)](https://nest.land/package/dotenv-parser)
 
-A fast, zero-permission Dotenv parser.
+A fast, zero-permission parser for '.env' files with support for multiline variables.
 
-This module doesn't load any file, it only parses their content.
-
-## Usage
-Import `dotenv-parser`:
+# Usage
+## Import
+Import `dotenv-parser` from one of the following registries:
 ```
 // From Deno.land
-import { dotEnvParser } from "https://deno.land/x/dotenv_parser/mod.ts";
+import { dotEnvParser } from "https://deno.land/x/dotenv_parser@v1.0.2/mod.ts";
+
 // From Nest.land
-import { dotEnvParser } from "https://x.nest.land/dotenv-parser@0.2.0/mod.ts";
+import { dotEnvParser } from "https://x.nest.land/dotenv-parser@v1.0.2/mod.ts";
+
 // From Denopkg
-import { dotEnvParser } from "https://denopkg.com/ymonb1291/dotenv-parser/mod.ts";
+import { dotEnvParser } from "https://denopkg.com/ymonb1291/dotenv-parser@v1.0.2/mod.ts";
+
 // From Github
-import { dotEnvParser } from "https://raw.githubusercontent.com/ymonb1291/dotenv-parser/main/mod.ts";
+import { dotEnvParser } from "https://raw.githubusercontent.com/ymonb1291/dotenv-parser/v1.0.2/mod.ts";
 ```
-Read your `.env` file and decode its content into a string, or just declare a string variable with `KEY=VALUE` pairs. For example:
+
+## Read the `.env` file
+`dotenv-parser` doesn't ship with a way to read files. You must decode your `.env` file on your own.
+
+For example:
+```
+const decoder = new TextDecoder("utf-8");
+const raw = Deno.readFileSync(".env");
+const data = decoder.decode(raw);
+console.log(dotEnvParser(data));
+```
+For the purpose of this documentation, we'll simply declare a string variable that contains the configuration.
+
+For example:
 ```
 const config = `
   SERVER_HOST=localhost
@@ -31,14 +46,16 @@ const config = `
   SERVER_HTTPS=true
 `;
 ```
-Parse the configuration:
+
+## Parsing
+The `dotEnvParser` function looks for `KEY=VALUE` pairs in a string and returns them as an object where all keys and values are of type `string`:
 ```
 const res = dotEnvParser(config);
 console.log(res);
 //  Output:
 //    { SERVER_HOST: "localhost", SERVER_PORT: "3000", SERVER_HTTPS: "true" }
 ```
-By default, all values are of type `string`. If you wish to automatically convert numbers and booleans to their respective types, you need to specify the `infer` parameter to `true`:
+`DotEnvParser` can also try accept a second `boolean` parameter. When true, the parser will try to infer the type of the value. Numbers and booleans will then be converted to their respective type:
 ```
 const res = dotEnvParser(config, true);
 console.log(res);
@@ -92,13 +109,13 @@ The parser supports key/value pairs formatted as `KEY=VALUE`. The following rule
   CALC=1+1
   \\=2
   ```
-  becomes `{CALC: "1+1\n=2",}`
+  becomes `{CALC: "1+1\n=2"}`
 * Multiline values can contain `#` if escaped
   ```
-  HASH=New trend on Twitter
-  \\#dotenv-parser
+  HASH=Hello
+  \\#World
   ```
-  becomes `{HASH: "New trend on Twitter\n#dotenv-parser"}`
+  becomes `{HASH: "Hello\n#World"}`
 
 # Contributions
 PRs are welcome!
