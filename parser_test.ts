@@ -1,5 +1,5 @@
+import { assertEquals } from "./deps_test.ts";
 import { dotEnvParser } from "./mod.ts";
-import { assertEquals } from "https://deno.land/std@0.79.0/testing/asserts.ts";
 
 const pairs: string = `
 # Numeric keys are skipped
