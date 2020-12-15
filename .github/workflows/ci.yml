@@ -1,25 +1,20 @@
-# This workflow will install Deno and run tests across stable and nightly builds on Windows, Ubuntu and macOS.
-# For more information see: https://github.com/denolib/setup-deno
-
 name: ci
 
 on:
-  
   push:
     branches: [main]
   pull_request:
     branches: [main]
   schedule:
-    - cron:  '0 0 */1 * *'
+    - cron:  '0 6 * * 1'
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: "ubuntu-20.04"
 
     strategy:
       matrix:
-        deno: ["v1.x", "nightly"]
-        os: [ubuntu-latest]
+        deno: ["v1.6.x", "nightly"]
 
     steps:
       - name: Setup repo
@@ -34,18 +29,13 @@ jobs:
         run: deno --version
 
       - name: Cache Dependencies
-        run: deno cache parser_test.ts
+        run: deno cache deps_test.ts
 
       - name: Run Tests
         run: deno test
 
   fmt:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        deno: ["nightly"]
-        os: [ubuntu-latest]
+    runs-on: "ubuntu-20.04"
 
     steps:
       - name: Setup repo
@@ -54,7 +44,7 @@ jobs:
       - name: Setup Deno environment
         uses: denolib/setup-deno@v2.3.0
         with:
-          deno-version: ${{ matrix.deno }}
+          deno-version: "v1.6.x"
 
       - name: Deno Version
         run: deno --version
