@@ -10,11 +10,11 @@ on:
 
 jobs:
   test:
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        deno: ["v1.6.x", "nightly"]
+        deno: ["v1.9.x"]
 
     steps:
       - name: Setup repo
